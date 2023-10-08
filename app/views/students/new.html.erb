@@ -1,0 +1,39 @@
+<h1> Enter the Student Information </h1>
+<%= form_for @student do |f| -%>
+    <label> Firstname </label>
+    <%= f.text_field :firstname %>
+    <label> Lastname </label>
+    <%= f.text_field :lastname %>
+    <%= f.submit "Submit" %>
+<% end %>
+
+<br />
+<h1> Display all student info</h1>
+<% if !@student.blank? %>
+    <% for item in @students %>
+        <strong>Id: <%= item.id %> </strong> |  <%= item.firstname %> <%= item.lastname %><br />
+    <%end%>
+<%else%>
+
+ <%end%>
+<br />
+<h1> Display all Question info</h1>
+<% if !@question.blank? %>
+    <% for item in @questions %>
+        <strong>Question <%=item.id %>: </strong><%= item.QuestionText %><br />
+    <%end%>
+<%else%>
+
+ <%end%>
+
+ <br />
+<h1> Display all Answer info</h1>
+<% answers = Answer.all %>
+<% if answers.any? %>
+  <% answers.each do |answer| %>
+    <strong>Student Name:</strong> <%= answer.student.firstname %> <strong>for Question:</strong><%= answer.question.id %><strong> Answered: </strong><%= answer.response %><br />
+  <% end %>
+<% else %>
+  <p>No answers found.</p>
+<% end %>
+
